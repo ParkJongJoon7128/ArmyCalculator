@@ -72,7 +72,8 @@ $(document).ready(function () {
                 { name: "공군", Month: 21 },
                 { name: "해군", Month: 20 },
                 { name: "해병대", Month: 18 },
-                { name: "의경(해경)", Month: 21 },
+                // 의경이랑 해경이랑 복무수가 다른거 같아 버튼을 하나더 만들어야 할듯.
+                { name: "의경(해경)", Month: 21 }, 
                 { name: "소방원", Month: 20 },
                 { name: "사회복무요원", Month: 20 },
             ];
