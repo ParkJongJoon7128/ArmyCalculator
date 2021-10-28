@@ -6,7 +6,9 @@ function handleClick(event) {
         event.target.classList.remove("clicked");
         armyBtn.style.backgroundColor = "#E2E2E2";
         armyBtn.style.color = "black";
-    } else {
+    } 
+    
+    else {
         for (let i = 0; i < armyBtn.length; i++) {
             armyBtn[i].classList.remove("clicked");
         }
@@ -37,9 +39,7 @@ function dayBetweenDate(date1, date2) {
     return diffDays;
 }
 
-/* var변수를 let으로 바꾼 이유:
-       https://velog.io/@bathingape/JavaScript-var-let-const-%EC%B0%A8%EC%9D%B4%EC%A0%90
-                */
+//datepicker 라이브러리 사용
 $(document).ready(function () {
     $("#datepicker").datepicker({
         dateFormat: "yy-mm-dd",
@@ -56,12 +56,12 @@ $(document).ready(function () {
             // jQueryUI getDate함수 API문서: https://api.jqueryui.com/datepicker/#method-getDate
             // javascript Date 클래스: https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Date
             const date = $("#datepicker").datepicker("getDate");
-            const inputYear = date.getFullYear();
-            const inputMonth = date.getMonth() + 1;
-            const inputDay = date.getDate();
+            let inputYear = date.getFullYear();
+            let inputMonth = date.getMonth() + 1;
+            let inputDay = date.getDate();
 
             //연, 월 계산 
-            const joinDate = new Date(inputYear, inputMonth - 1, inputDay);
+            let joinDate = new Date(inputYear, inputMonth - 1, inputDay);
 
             $(".showDate").text(
                 `${inputYear}-${inputMonth}-${inputDay}` // https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Template_literals
@@ -78,7 +78,7 @@ $(document).ready(function () {
                 { name: "사회복무요원", Month: 20 },
             ];
 
-            const armyMonth = list[0].Month;
+            let armyMonth = list[0].Month;
             armyMonth -= 12;
             if(inputMonth <= 12 - armyMonth){
                 inputYear += 1;
@@ -143,15 +143,17 @@ $(document).ready(function () {
                 inputMonth = 3;
             }
 
+
+            const dischargeDate = new Date(inputYear, inputMonth - 1, inputDay);
             
 
             // 여기랑 각 군에 대한 버튼 클릭시 올바르게 계산되게 버튼 수정해야됨.
-            const day = list.filter((item) => item.name === targetText)[0].day;
+            const day = list.filter((item) => item.name === targetText)[0].Month;
 
             date.setDate(day);
 
             $("#discharge").text(
-                `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+                `${dischargeDate.getFullYear()}-${Number(dischargeDate.getMonth() + 1)}-${dischargeDate.getDate()}`
             );
             $("#allDay").text(day);
             // calculator.js에서 선언, 전역일과 현재일을 파라미터로
